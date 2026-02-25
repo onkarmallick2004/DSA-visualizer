@@ -115,31 +115,29 @@ def color_bars(arr, highlights, pivots, sorted_indices):
     bars_html += """
 </div>
 </div>"""
-    return bars_html
+    return bars_html.replace('\n', '')
 
 def render_legend():
     theme = get_color_theme()
-    legend_html = f"""
-    <div style="display: flex; justify-content: center; gap: 30px; margin-top: 20px; padding: 15px; background: #111827; border-radius: 12px; border: 1px solid #1f2937;">
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <div style="width: 16px; height: 16px; border-radius: 4px; background: {theme['unsorted']['bg']}; box-shadow: 0 0 10px {theme['unsorted']['glow']};"></div>
-            <span style="color: #d1d5db; font-weight: 600; font-size: 14px;">Unsorted</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <div style="width: 16px; height: 16px; border-radius: 4px; background: {theme['comparing']['bg']}; box-shadow: 0 0 10px {theme['comparing']['glow']};"></div>
-            <span style="color: #d1d5db; font-weight: 600; font-size: 14px;">Comparing</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <div style="width: 16px; height: 16px; border-radius: 4px; background: {theme['pivot']['bg']}; box-shadow: 0 0 10px {theme['pivot']['glow']};"></div>
-            <span style="color: #d1d5db; font-weight: 600; font-size: 14px;">Pivot</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <div style="width: 16px; height: 16px; border-radius: 4px; background: {theme['sorted']['bg']}; box-shadow: 0 0 10px {theme['sorted']['glow']};"></div>
-            <span style="color: #d1d5db; font-weight: 600; font-size: 14px;">Sorted</span>
-        </div>
+    legend_html = f"""<div style="display: flex; justify-content: center; gap: 30px; margin-top: 20px; padding: 15px; background: #111827; border-radius: 12px; border: 1px solid #1f2937;">
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 16px; height: 16px; border-radius: 4px; background: {theme['unsorted']['bg']}; box-shadow: 0 0 10px {theme['unsorted']['glow']};"></div>
+        <span style="color: #d1d5db; font-weight: 600; font-size: 14px;">Unsorted</span>
     </div>
-    """
-    return legend_html
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 16px; height: 16px; border-radius: 4px; background: {theme['comparing']['bg']}; box-shadow: 0 0 10px {theme['comparing']['glow']};"></div>
+        <span style="color: #d1d5db; font-weight: 600; font-size: 14px;">Comparing</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 16px; height: 16px; border-radius: 4px; background: {theme['pivot']['bg']}; box-shadow: 0 0 10px {theme['pivot']['glow']};"></div>
+        <span style="color: #d1d5db; font-weight: 600; font-size: 14px;">Pivot</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 16px; height: 16px; border-radius: 4px; background: {theme['sorted']['bg']}; box-shadow: 0 0 10px {theme['sorted']['glow']};"></div>
+        <span style="color: #d1d5db; font-weight: 600; font-size: 14px;">Sorted</span>
+    </div>
+</div>"""
+    return legend_html.replace('\n', '')
 
 # --- ALGORITHM GENERATORS ---
 def bubble_sort(arr):
@@ -253,36 +251,36 @@ def quick_sort(arr):
 # --- MAIN UI COMPONENT ---
 def main():
     st.markdown("""
-        <div style="text-align: center; margin-bottom: 2rem;">
-            <h1 style="color: #f3f4f6; font-size: 3rem; font-weight: 800; margin: 0; text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);">
-                Algorithm Visualizer
-            </h1>
-            <p style="color: #9ca3af; font-size: 1.1rem; margin-top: 0.5rem;">
-                High-performance sorting engine visualization
-            </p>
-        </div>
-    """, unsafe_allow_html=True)
+<div style="text-align: center; margin-bottom: 2rem;">
+    <h1 style="color: #f3f4f6; font-size: 3rem; font-weight: 800; margin: 0; text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);">
+        Algorithm Visualizer
+    </h1>
+    <p style="color: #9ca3af; font-size: 1.1rem; margin-top: 0.5rem;">
+        High-performance sorting engine visualization
+    </p>
+</div>
+""", unsafe_allow_html=True)
 
     with st.sidebar:
         st.markdown("""
-            <h2 style="color: #f3f4f6; font-size: 1.5rem; font-weight: 800; margin-bottom: 2rem; border-bottom: 2px solid #1f2937; padding-bottom: 0.5rem;">
-                Control Panel
-            </h2>
-        """, unsafe_allow_html=True)
+<h2 style="color: #f3f4f6; font-size: 1.5rem; font-weight: 800; margin-bottom: 2rem; border-bottom: 2px solid #1f2937; padding-bottom: 0.5rem;">
+    Control Panel
+</h2>
+""", unsafe_allow_html=True)
         
         st.markdown("<p style='color: #9ca3af; font-weight: 600; margin-bottom: 0.25rem;'>ALGORITHM</p>", unsafe_allow_html=True)
-        algorithm = st.selectbox("", 
+        algorithm = st.selectbox("Algorithm", 
             ("Bubble Sort", "Insertion Sort", "Selection Sort", "Merge Sort", "Quick Sort"), 
             label_visibility="collapsed"
         )
         
         st.markdown("<br>", unsafe_allow_html=True)
         st.markdown("<p style='color: #9ca3af; font-weight: 600; margin-bottom: 0.25rem;'>ARRAY DENSITY</p>", unsafe_allow_html=True)
-        array_size = st.slider("", min_value=10, max_value=60, value=30, label_visibility="collapsed")
+        array_size = st.slider("Array Density", min_value=10, max_value=60, value=30, label_visibility="collapsed")
         
         st.markdown("<br>", unsafe_allow_html=True)
         st.markdown("<p style='color: #9ca3af; font-weight: 600; margin-bottom: 0.25rem;'>EXECUTION SPEED</p>", unsafe_allow_html=True)
-        speed = st.slider("", min_value=0.1, max_value=2.0, value=1.5, step=0.1, label_visibility="collapsed")
+        speed = st.slider("Execution Speed", min_value=0.1, max_value=2.0, value=1.5, step=0.1, label_visibility="collapsed")
         delay = max(0.01, 2.05 - speed)
 
         st.markdown("<br><br>", unsafe_allow_html=True)
